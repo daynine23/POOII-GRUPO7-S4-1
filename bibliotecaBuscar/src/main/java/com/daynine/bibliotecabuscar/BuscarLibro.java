@@ -150,9 +150,9 @@ public class BuscarLibro extends javax.swing.JFrame {
         
         DefaultTableModel modelResult = (DefaultTableModel) tblResult.getModel();
         modelResult.setRowCount(0);
-        modelResult.set
         
-        List<String> fileList = new ArrayList<>();
+        
+        /*List<String> fileList = new ArrayList<>();
         String nombreAlumno = "";
         if(Obtener_Codigo_Alumno.getText().isEmpty()){
             showMessageDialog(null, "Porfavor ingrese el codigo de alumno!");
@@ -194,7 +194,7 @@ public class BuscarLibro extends javax.swing.JFrame {
             
         }catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
        
         //}
         
@@ -241,7 +241,7 @@ public class BuscarLibro extends javax.swing.JFrame {
         List<String> fileLineList = new ArrayList<>();
         
         try{
-            FileReader fr = new FileReader("./src/main/java/com/daynine/bibliotecabuscar/autores.txt");
+            FileReader fr = new FileReader("./src/main/java/com/daynine/bibliotecabuscar/Autor.txt");
             BufferedReader br = new BufferedReader(fr);
          
             String d;
@@ -259,9 +259,6 @@ public class BuscarLibro extends javax.swing.JFrame {
                 
                 String part1 = parts[0];
                 
-                if(listaFillAutores.getSize()==0){
-                    listaFillAutores.addElement(part1);
-                }
                 
                 /*if(listaFillAutores.isEmpty()){
                 listaCursoPorCod.addElement(part1);
@@ -281,7 +278,7 @@ public class BuscarLibro extends javax.swing.JFrame {
             
             for (int i = 0; i < fileLineList.size(); i++) {
                 listaFillAutores.addElement(fileLineList.get(i));
-                System.out.println("Autor txt" + fileLineList.get(i));
+                System.out.println("Autor txt " + fileLineList.get(i));
                 System.out.println("Autor: " + listaFillAutores.getElementAt(i));
             }
             
