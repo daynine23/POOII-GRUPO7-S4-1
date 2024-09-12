@@ -111,14 +111,14 @@ public class BuscarLibro extends javax.swing.JFrame {
                     .addComponent(cboAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnBuscarLibro)
-                        .addGap(276, 276, 276))))
+                        .addGap(276, 276, 276))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +137,9 @@ public class BuscarLibro extends javax.swing.JFrame {
                     .addComponent(cboAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(btnBuscarLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,18 +150,20 @@ public class BuscarLibro extends javax.swing.JFrame {
         
         DefaultTableModel modelResult = (DefaultTableModel) tblResult.getModel();
         modelResult.setRowCount(0);
+        tblResult.setModel(modelResult);
         
         
-        /*List<String> fileList = new ArrayList<>();
-        String nombreAlumno = "";
-        if(Obtener_Codigo_Alumno.getText().isEmpty()){
+        List<String> fileList = new ArrayList<>();
+        String codIsbn = "";
+        String titulo = "";
+        String nombreAutor = "";
+        /*if(Obtener_Codigo_Alumno.getText().isEmpty()){
             showMessageDialog(null, "Porfavor ingrese el codigo de alumno!");
             return;
-        }
+        }*/
         
-        //if(!listaCargada){
         try{
-            FileReader fr = new FileReader("./src/main/java/com/daynine/bibliotecabuscar/libros.txt");
+            FileReader fr = new FileReader("./src/main/java/com/daynine/bibliotecabuscar/Libro.txt");
             BufferedReader br = new BufferedReader(fr);
             
             String d;
@@ -179,22 +181,33 @@ public class BuscarLibro extends javax.swing.JFrame {
                 String part1 = parts[0];
                 String part2 = parts[1];
                 String part3 = parts[2];
-                if(part2.equals(Obtener_Codigo_Alumno.getText())){
+                String part4 = parts[3];
+                String part5 = parts[4];
+                /*if(part2.equals(Obtener_Codigo_Alumno.getText())){
                     listaCursoPorCod.addElement(part1);
-                    nombreAlumno = part3;
-                }
+                }*/
+                modelResult.setRowCount(fileList.size());
+                //Setea ISBN
+                modelResult.setValueAt(part1, i, 0);
+                //Setea Titulo
+                modelResult.setValueAt(part2, i, 1);
+                //Setea si es Leido
+                modelResult.setValueAt(part3, i, 2);
+                //Setea si Lo tengo
+                modelResult.setValueAt(part4, i, 3);
+                //Setea Autor
+                modelResult.setValueAt(part5, i, 4);
             }
             
-            if(listaCursoPorCod.size() == 0){
-                listaCursoPorCod.addElement("Alumno no tiene cursos registrados!");
-            }
-            Lista_Cursos.setModel(listaCursoPorCod);
-            txtAlumnoName.setText(nombreAlumno);
-            //listaCargada = true;
+            /*if(listaCursoPorCod.size() == 0){
+                listaCursoPorCod.addElement("No existe el Libro que desea buscar!");
+            }*/
+            tblResult.setModel(modelResult);
+            
             
         }catch(Exception e){
             e.printStackTrace();
-        }*/
+        }
        
         //}
         

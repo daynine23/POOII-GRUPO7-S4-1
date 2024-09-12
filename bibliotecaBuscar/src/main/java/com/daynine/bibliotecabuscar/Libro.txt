@@ -1,0 +1,3 @@
+9876543219876,Metamorfosis,true,false,Kafka
+9876543216543,El Castillo,false,false,Kafka
+9876543213210,Ciudad y los Perros,false,false,Mario Vargas
