@@ -8,6 +8,7 @@ package crearlibro;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,6 +48,11 @@ public class Autor {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    public void jComboBoxAutores(JComboBox autores){
+        autores.removeAllItems();
+        
     }
 
     @Override

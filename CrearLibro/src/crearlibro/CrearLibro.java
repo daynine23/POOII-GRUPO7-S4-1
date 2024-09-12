@@ -5,18 +5,28 @@
  */
 package crearlibro;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Sofía
  */
-public class InterfazCrearLibro extends javax.swing.JFrame {
+public class CrearLibro extends javax.swing.JFrame {
 
     /**
-     * Creates new form InterfazCrearLibro
+     * Creates new form CrearLibro
      */
     Libro libro = new Libro();
-    public InterfazCrearLibro() {
+    Autor autor = new Autor();
+    DefaultComboBoxModel listaFillAutores = new DefaultComboBoxModel();
+    public CrearLibro() {
+        
         initComponents();
+        jComboBox_AUTOR.setModel(llenarComboAutores());
     }
 
     /**
@@ -124,8 +134,18 @@ public class InterfazCrearLibro extends javax.swing.JFrame {
         });
 
         jCheckBox1_LEIDO.setText("Leido");
+        jCheckBox1_LEIDO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1_LEIDOActionPerformed(evt);
+            }
+        });
 
         jCheckBox2_LOTENGO.setText("Lo tengo");
+        jCheckBox2_LOTENGO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2_LOTENGOActionPerformed(evt);
+            }
+        });
 
         BTN_GUARDAR.setText("GUARDAR");
         BTN_GUARDAR.addActionListener(new java.awt.event.ActionListener() {
@@ -251,19 +271,45 @@ public class InterfazCrearLibro extends javax.swing.JFrame {
         // TODO add your handling code here:
         String ISBN =TXT_ISBN.getText();
         String Titulo=txt_titulo.getText();
-        //Autor Autor = jComboBox_AUTOR.getSelectedItem();
-        String Sinopsis = TXTSinopsis.getText();
         
+        String n = jComboBox_AUTOR.getSelectedItem().toString();
+        
+        String Sinopsis = TXTSinopsis.getText();
+        String Genero="";
         if (jRadioButton_TERROR.isSelected()) {
-            String Genero ="Terror";
+           Genero ="Terror";
         } else if (jRadioButton_CFiccion.isSelected()) {
-            String Genero ="Ciencia  Ficción";
+            Genero ="Ciencia  Ficción";
         } else if (jRadioButton_Romance.isSelected()) {
-            String Genero ="Romance";;
+            Genero ="Romance";
         
         } else if (jRadioButton_FANTASIA.isSelected()) {
-            String Genero ="Fantasía";;
+            Genero ="Fantasía";
         }
+        
+        boolean leido;
+        boolean lotengo;
+        
+        if(jCheckBox1_LEIDO.isSelected()){
+            leido = true;
+        }else{
+            leido = false;
+        }
+        if(jCheckBox2_LOTENGO.isSelected()){
+            lotengo = true;
+        }else{
+            lotengo=false;
+        }
+        
+        libro.setISBN(ISBN);
+        libro.setTitulo(Titulo);
+        libro.setAutor(n);
+        libro.setSinopsis(Sinopsis);
+        libro.setGenero(Genero);
+        libro.setLeido(leido);
+        libro.setLoTengo(lotengo);
+        libro.guardarArchivo(libro);
+        
        
     }//GEN-LAST:event_BTN_GUARDARActionPerformed
 
@@ -287,6 +333,69 @@ public class InterfazCrearLibro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton_FANTASIAActionPerformed
 
+    private void jCheckBox1_LEIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1_LEIDOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1_LEIDOActionPerformed
+
+    private void jCheckBox2_LOTENGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2_LOTENGOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2_LOTENGOActionPerformed
+    
+    
+    
+    private DefaultComboBoxModel llenarComboAutores(){
+        
+        List<String> fileLineList = new ArrayList<>();
+        
+        try{
+            FileReader fr = new FileReader("./src/crearlibro/Autor.txt");
+            BufferedReader br = new BufferedReader(fr);
+         
+            String d;
+            while((d=br.readLine())!= null){
+                    fileLineList.add(d);
+            }
+            br.close();
+            
+            
+            for(int i=0; i < fileLineList.size(); i++){
+                boolean duplicado = false;
+                String line = fileLineList.get(i);
+                String[] parts = new String[0];
+                parts = line.split(",");
+                
+                String part1 = parts[0];
+                
+                
+                /*if(listaFillAutores.isEmpty()){
+                listaCursoPorCod.addElement(part1);
+                } 
+                else{
+                for( int j=0; j < listaCursoPorCod.size(); j++){
+                    if(Objects.equals(part1, listaCursoPorCod.getElementAt(j))){
+                        duplicado = true;
+                        break;
+                    }
+                }
+                    if(!duplicado){
+                    listaCursoPorCod.addElement(part1);
+                    }
+                }*/
+            }
+            
+            for (int i = 0; i < fileLineList.size(); i++) {
+                listaFillAutores.addElement(fileLineList.get(i));
+                System.out.println("Autor txt " + fileLineList.get(i));
+                System.out.println("Autor: " + listaFillAutores.getElementAt(i));
+            }
+            
+            
+            }catch(Exception e){
+            e.printStackTrace();
+        }
+        return listaFillAutores;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -304,20 +413,21 @@ public class InterfazCrearLibro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazCrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazCrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazCrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazCrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazCrearLibro().setVisible(true);
+                new CrearLibro().setVisible(true);
             }
         });
     }

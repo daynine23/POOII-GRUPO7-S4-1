@@ -17,22 +17,32 @@ import javax.swing.JOptionPane;
 public class Libro {
     private String ISBN;
     private String Titulo;
-    private Autor Autor;
+    private String Autor;
     private String Sinopsis;
     private String Genero;
+    private boolean leido;
+    private boolean loTengo;
 
     public Libro() {
     }
-    
 
-    public Libro(String ISBN, String Titulo, Autor Autor, String Sinopsis, String Genero) {
+    public Libro(String ISBN, String Titulo, String Autor, String Sinopsis, String Genero, boolean leido, boolean loTengo) {
         this.ISBN = ISBN;
         this.Titulo = Titulo;
         this.Autor = Autor;
         this.Sinopsis = Sinopsis;
         this.Genero = Genero;
+        this.leido = leido;
+        this.loTengo = loTengo;
     }
+    
 
+    
+    
+    
+    
+
+    
     public String getISBN() {
         return ISBN;
     }
@@ -49,11 +59,11 @@ public class Libro {
         this.Titulo = Titulo;
     }
 
-    public Autor getAutor() {
+    public String getAutor() {
         return Autor;
     }
 
-    public void setAutor(Autor Autor) {
+    public void setAutor(String Autor) {
         this.Autor = Autor;
     }
 
@@ -72,6 +82,24 @@ public class Libro {
     public void setGenero(String Genero) {
         this.Genero = Genero;
     }
+
+    public boolean isLeido() {
+        return leido;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
+    }
+
+    public boolean isLoTengo() {
+        return loTengo;
+    }
+
+    public void setLoTengo(boolean loTengo) {
+        this.loTengo = loTengo;
+    }
+    
+    
     public void guardarArchivo(Libro libro){
         try{
             FileWriter fw = new FileWriter("./src/crearlibro/Libro.txt",true);
@@ -79,9 +107,13 @@ public class Libro {
             PrintWriter pw = new PrintWriter(bw);
             pw.print(libro.getISBN());
             pw.print("," + libro.getTitulo());
+            pw.print("," + libro.isLeido());
+            pw.print("," + libro.isLoTengo());
             pw.print("," + libro.getAutor());
             pw.print("," + libro.getSinopsis());
             pw.println("," + libro.getGenero());
+            
+            
            
             pw.close();
             

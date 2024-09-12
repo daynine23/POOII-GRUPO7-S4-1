@@ -249,11 +249,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Leido"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1_LEIDOActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2_LOTENGO">
       <Properties>
         <Property name="text" type="java.lang.String" value="Lo tengo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox2_LOTENGOActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BTN_GUARDAR">
       <Properties>

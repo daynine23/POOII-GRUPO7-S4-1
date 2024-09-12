@@ -1,0 +1,2 @@
+65465468,nuevolibro1,true,true,Mario Vargas,interesante,Terror
+6546845335,metamorfosis,true,false,Frank Kafka,insecto,Terror
