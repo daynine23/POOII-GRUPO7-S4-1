@@ -183,20 +183,19 @@ public class BuscarLibro extends javax.swing.JFrame {
                 String part3 = parts[2];
                 String part4 = parts[3];
                 String part5 = parts[4];
-                /*if(part2.equals(Obtener_Codigo_Alumno.getText())){
-                    listaCursoPorCod.addElement(part1);
-                }*/
-                modelResult.setRowCount(fileList.size());
-                //Setea ISBN
-                modelResult.setValueAt(part1, i, 0);
-                //Setea Titulo
-                modelResult.setValueAt(part2, i, 1);
-                //Setea si es Leido
-                modelResult.setValueAt(part3, i, 2);
-                //Setea si Lo tengo
-                modelResult.setValueAt(part4, i, 3);
-                //Setea Autor
-                modelResult.setValueAt(part5, i, 4);
+                if(part1.equals(txtIsbn.getText()) || part2.equals(txtTitulo.getText()) || part5.equals(cboAutor.getSelectedItem().toString())){
+                    modelResult.setRowCount(fileList.size());
+                    //Setea ISBN
+                    modelResult.setValueAt(part1, i, 0);
+                    //Setea Titulo
+                    modelResult.setValueAt(part2, i, 1);
+                    //Setea si es Leido
+                    modelResult.setValueAt(part3, i, 2);
+                    //Setea si Lo tengo
+                    modelResult.setValueAt(part4, i, 3);
+                    //Setea Autor
+                    modelResult.setValueAt(part5, i, 4);
+                }
             }
             
             /*if(listaCursoPorCod.size() == 0){
